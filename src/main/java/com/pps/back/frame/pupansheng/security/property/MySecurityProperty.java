@@ -25,6 +25,8 @@ public class MySecurityProperty {
     private  final   SmsProperty sms=new SmsProperty();
     private  String validateCodeParam="verifyCode";//验证码参数名
     private  Boolean canCrossOrigin=false;
+    private  Boolean openConfigUser=false;
+    private  String  configUser;
 
     public static class SmsProperty{
 
@@ -112,6 +114,22 @@ public class MySecurityProperty {
 
 
 
+    }
+
+    public Boolean getOpenConfigUser() {
+        return openConfigUser;
+    }
+
+    public void setOpenConfigUser(Boolean openConfigUser) {
+        this.openConfigUser = openConfigUser;
+    }
+
+    public String getConfigUser() {
+        return configUser;
+    }
+
+    public void setConfigUser(String configUser) {
+        this.configUser = configUser;
     }
 
     public Boolean getCanCrossOrigin() {

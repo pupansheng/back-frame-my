@@ -1,12 +1,15 @@
 package com.pps.back.frame.pupansheng.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.pps.back.frame.pupansheng.common.model.Result;
+import com.pps.back.frame.pupansheng.common.util.ValidateUtil;
 import com.pps.back.frame.pupansheng.security.entity.SysPermisson;
 import com.pps.back.frame.pupansheng.security.entity.SysRole;
 import com.pps.back.frame.pupansheng.security.entity.SysUser;
 import com.pps.back.frame.pupansheng.security.mapper.SysPermissonDao;
 import com.pps.back.frame.pupansheng.security.mapper.SysRoleDao;
 import com.pps.back.frame.pupansheng.security.mapper.SysUserDao;
+import com.pps.back.frame.pupansheng.security.property.MySecurityProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author
@@ -33,12 +37,37 @@ public class SystemController {
     SysRoleDao sysRoleDao;
     @Autowired
     SysUserDao sysUserDao;
+    @Autowired
+    MySecurityProperty mySecurityProperty;
 
     @RequestMapping("/getLoginInfo")//登陆获得自己登录信息
     public Result getLoginInfo(){
-        Map info=new HashMap<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username= (String) authentication.getPrincipal();
+        Map info=new HashMap<>();
+        if(mySecurityProperty.getOpenConfigUser()){
+
+            List<Map> maps = JSON.parseArray(mySecurityProperty.getConfigUser(), Map.class);
+            List<Map> userMap = maps.stream().filter(p -> p.get("username").equals(username)).collect(Collectors.toList());
+            if(ValidateUtil.isNotEmpty(userMap)){
+                SysUser sysUser=new SysUser();
+                sysUser.setName((String)userMap.get(0).get("username"));
+                sysUser.setPassword((String)userMap.get(0).get("password"));
+                List<SysRole> roles=new ArrayList<>();
+                SysRole sysRole1=new SysRole();
+                sysRole1.setId(1L);
+                sysRole1.setName("ROLE_ADMIN");
+                roles.add(sysRole1);
+                info.put("userInfo",sysUser);
+                info.put("roles", roles);
+                info.put("permission",new ArrayList<>());
+                return  Result.ok(info);
+            }
+
+
+
+        }
+
         SysUser sysUser =new SysUser() ;
         sysUser.setName(username);
         SysUser sysUser1 = sysUserDao.queryCondition(sysUser).get(0);

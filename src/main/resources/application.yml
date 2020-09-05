@@ -13,7 +13,7 @@ spring:
     #driver-class-name: com.mysql.jdbc.Driver
     #url: jdbc:mysql://120.79.204.37:3306/sajt?characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/webmodel?useUnicode=true&characterEncoding=UTF-8&userSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/webmodel2?useUnicode=true&characterEncoding=UTF-8&userSSL=false&serverTimezone=GMT%2B8
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
     initialSize: 5
@@ -66,8 +66,10 @@ mysecurity:
   smsMessage: /sms/get/yanzhengma
   openRequestLog: true               #网络请求是否打印
   canCrossOrigin: true               #是否生成跨域访问filter  建议生产环境取消
+  openConfigUser: true               #是否开启本地测试用户  若开启 则configUsers不能为空 为一个数组 并且权限固定为ROLE_ADMIN
+  configUser: '[{"username":"admin","password":"123"},{"username":"n1","password":"x1111111"}]'
   sms:
-     openSms: true
+     openSms: false
      smsLoginUrl: /sms/login
      smsMessage:  /sms/get/yanzhengma #短信验证码获取
      mobileParameter: phone           #网络请求的电话号码参数
@@ -76,7 +78,7 @@ mysecurity:
      sessionPhoneParam: phone         #存到session里面的应该为一个map  这是map的电话号码参数
      sessionCodeParam:  code          #存到session里面的应该为一个map  这是map的验证码参数
   jwt:
-      enable: true                   #开启jwt登录  开启后登陆成功后返回前端token  下次带token 可以授权
+      enable: false                   #开启jwt登录  开启后登陆成功后返回前端token  下次带token 可以授权
       jwtLoginUrl: /jwt/login         #没有用到
       filter: /jwt/**
       expire: 604800
