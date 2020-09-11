@@ -6,27 +6,22 @@ server:
   servlet:
     context-path: /pps
 spring:
-  datasource:
-    #   数据源基本配置
-    username: root
-    password: pps123
-    #driver-class-name: com.mysql.jdbc.Driver
-    #url: jdbc:mysql://120.79.204.37:3306/sajt?characterEncoding=utf-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/webmodel2?useUnicode=true&characterEncoding=UTF-8&userSSL=false&serverTimezone=GMT%2B8
-    type: com.alibaba.druid.pool.DruidDataSource
-    #   数据源其他配置
-    initialSize: 5
-    minIdle: 50
-    maxActive: 100
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
+  dataSourseList: data-source1        #数据源列表名称 与下面数据源对应  第一个默认为主数据库
+  data-source1:
+    type: com.alibaba.druid.pool.DruidDataSource  #数据源类型
+    database:                                     #数据源基本配置
+      username: root
+      password: pps123
+      driver_class_name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/webmodel?useUnicode=true&characterEncoding=UTF-8&userSSL=false&serverTimezone=GMT%2B8
+    mybatisConfig:
+      type-aliases-ackageList:                       #别名
+
+      mapperXmlLocation:                             #mapper.xml  位置
+        - classpath:mybatis/security/mapper/*.xml
+      mapperLocation:                                #mapper位置
+        - com.pps.back.frame.pupansheng.core.authority.security.mapper
+        - com.pps.back.frame.pupansheng.mapper
   mvc:
     format:
       date-time: yyyy-MM-dd HH:mm:ss

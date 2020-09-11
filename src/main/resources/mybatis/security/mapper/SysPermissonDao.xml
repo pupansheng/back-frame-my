@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pps.back.frame.pupansheng.security.mapper.SysPermissonDao">
-  <resultMap id="BaseResultMap" type="com.pps.back.frame.pupansheng.security.entity.SysPermisson">
+<mapper namespace="com.pps.back.frame.pupansheng.core.authority.security.mapper.SysPermissonDao">
+  <resultMap id="BaseResultMap" type="com.pps.back.frame.pupansheng.core.authority.security.entity.SysPermisson">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="action" jdbcType="VARCHAR" property="action" />
     <result column="page" jdbcType="VARCHAR" property="page" />
@@ -16,7 +16,7 @@
     from sys_permisson
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="queryPermissonByRoleId" resultType="com.pps.back.frame.pupansheng.security.entity.SysPermisson">
+  <select id="queryPermissonByRoleId" resultType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysPermisson">
 
     select
     <include refid="Base_Column_List" />
@@ -28,13 +28,13 @@
     delete from sys_permisson
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.security.entity.SysPermisson" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysPermisson" useGeneratedKeys="true">
     insert into sys_permisson (`action`, page, sys_role_id
       )
     values (#{action,jdbcType=VARCHAR}, #{page,jdbcType=VARCHAR}, #{sysRoleId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.security.entity.SysPermisson" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysPermisson" useGeneratedKeys="true">
     insert into sys_permisson
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="action != null">
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pps.back.frame.pupansheng.security.entity.SysPermisson">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysPermisson">
     update sys_permisson
     <set>
       <if test="action != null">
@@ -74,7 +74,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pps.back.frame.pupansheng.security.entity.SysPermisson">
+  <update id="updateByPrimaryKey" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysPermisson">
     update sys_permisson
     set `action` = #{action,jdbcType=VARCHAR},
       page = #{page,jdbcType=VARCHAR},

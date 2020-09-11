@@ -1,6 +1,6 @@
 package com.pps.back.frame.pupansheng.common.model;
 
-import com.pps.back.frame.pupansheng.security.component.exception.GlobalCode;
+import com.pps.back.frame.pupansheng.core.authority.security.component.exception.GlobalCode;
 
 /**
  * @author

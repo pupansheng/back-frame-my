@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pps.back.frame.pupansheng.security.mapper.SysUserDao">
-  <resultMap id="BaseResultMap" type="com.pps.back.frame.pupansheng.security.entity.SysUser">
+<mapper namespace="com.pps.back.frame.pupansheng.core.authority.security.mapper.SysUserDao">
+  <resultMap id="BaseResultMap" type="com.pps.back.frame.pupansheng.core.authority.security.entity.SysUser">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -16,7 +16,7 @@
     from sys_user
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="queryCondition" resultType="com.pps.back.frame.pupansheng.security.entity.SysUser">
+  <select id="queryCondition" resultType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysUser">
     select
     <include refid="Base_Column_List" />
     from sys_user
@@ -37,13 +37,13 @@
     delete from sys_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.security.entity.SysUser" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysUser" useGeneratedKeys="true">
     insert into sys_user (`name`, `password`, phone
       )
     values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.security.entity.SysUser" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysUser" useGeneratedKeys="true">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -68,7 +68,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pps.back.frame.pupansheng.security.entity.SysUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysUser">
     update sys_user
     <set>
       <if test="name != null">
@@ -83,7 +83,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pps.back.frame.pupansheng.security.entity.SysUser">
+  <update id="updateByPrimaryKey" parameterType="com.pps.back.frame.pupansheng.core.authority.security.entity.SysUser">
     update sys_user
     set `name` = #{name,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
