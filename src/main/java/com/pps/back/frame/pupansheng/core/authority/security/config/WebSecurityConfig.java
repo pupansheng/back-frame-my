@@ -1,7 +1,8 @@
 package com.pps.back.frame.pupansheng.core.authority.security.config;
 
 import com.alibaba.fastjson.JSON;
-import com.pps.back.frame.pupansheng.common.util.ValidateUtil;
+
+import com.pps.back.frame.pupansheng.core.common.util.ValidateUtil;
 import com.pps.back.frame.pupansheng.core.authority.security.component.common.CustomAuthenticationDetailsSource;
 import com.pps.back.frame.pupansheng.core.authority.security.component.common.CustomPermissionEvaluator;
 import com.pps.back.frame.pupansheng.core.authority.security.component.common.MyInvalidSessionStrategy;

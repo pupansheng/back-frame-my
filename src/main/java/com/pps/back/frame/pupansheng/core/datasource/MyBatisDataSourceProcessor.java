@@ -1,6 +1,7 @@
 package com.pps.back.frame.pupansheng.core.datasource;
 
-import com.pps.back.frame.pupansheng.common.util.ValidateUtil;
+import com.pps.back.frame.pupansheng.core.common.util.ValidateUtil;
+import com.pps.back.frame.pupansheng.core.mymaperscan.MyClassPathMapperScanner;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,6 @@ import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.mapper.ClassPathMapperScanner;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -17,7 +17,6 @@ import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.EnvironmentAware;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
@@ -63,7 +62,6 @@ public class MyBatisDataSourceProcessor implements ImportBeanDefinitionRegistrar
                 {
 
                     Map dataSourceProperties= (Map) this.binder.bind(DATASOURCE_PREFIX + ADD_CHAR + dataSourseName+".database", Bindable.of(Map.class)).get();
-
                     Class<?> aClass = null;
                     if(ValidateUtil.isEmpty(baseSourceConfig.getType())||(aClass= Class.forName(baseSourceConfig.getType()))==null){
                         log.warn("指定的数据源类型为空或类库不存在 ！！！应用采用默认的数据库源:{}数据源"," HikariDataSource.class");
@@ -129,7 +127,8 @@ public class MyBatisDataSourceProcessor implements ImportBeanDefinitionRegistrar
         log.info("配置数据源：{}  mappper  位置-------------------------------------------------------", dataSourseName);
         for (String mapperPackage : mappersList) {
             log.info("为数据源：{}  配置dao接口 mapper 位置：{}", dataSourseName, mapperPackage);
-            ClassPathMapperScanner scanner = new ClassPathMapperScanner(beanDefinitionRegistry);
+          //  ClassPathMapperScanner scanner = new ClassPathMapperScanner(beanDefinitionRegistry);
+            MyClassPathMapperScanner scanner=new MyClassPathMapperScanner(beanDefinitionRegistry);
             scanner.setSqlSessionFactoryBeanName(sessionFactoryName);
             scanner.registerFilters();
             scanner.doScan(mapperPackage);

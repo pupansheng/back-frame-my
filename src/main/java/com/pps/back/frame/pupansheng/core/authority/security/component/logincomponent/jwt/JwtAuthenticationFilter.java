@@ -1,7 +1,8 @@
 package com.pps.back.frame.pupansheng.core.authority.security.component.logincomponent.jwt;
 
 import com.alibaba.fastjson.JSON;
-import com.pps.back.frame.pupansheng.common.util.ValidateUtil;
+
+import com.pps.back.frame.pupansheng.core.common.util.ValidateUtil;
 import com.pps.back.frame.pupansheng.core.authority.security.property.JWTUtil;
 import com.pps.back.frame.pupansheng.core.authority.security.property.MySecurityProperty;
 import io.jsonwebtoken.Claims;

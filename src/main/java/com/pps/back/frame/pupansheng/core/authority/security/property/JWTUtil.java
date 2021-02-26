@@ -1,7 +1,8 @@
 package com.pps.back.frame.pupansheng.core.authority.security.property;
 
 
-import com.pps.back.frame.pupansheng.common.util.ValidateUtil;
+
+import com.pps.back.frame.pupansheng.core.common.util.ValidateUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
